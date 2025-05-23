@@ -15,7 +15,7 @@ public class UserInterface {
     }
 
     private void showHomeMenu() {
-        Console.header("Welcome to DELI-cious!");
+        Console.header("   Welcome to DELI-cious!");
         Console.print("1) New Order");
         Console.print("0) Exit");
 
@@ -36,7 +36,7 @@ public class UserInterface {
         boolean ordering = true;
 
         while (ordering) {
-            Console.header("Order Menu");
+            Console.header("       Order Menu");
             Console.print("1) Add Sandwich");
             Console.print("2) Add Drink (coming soon)");
             Console.print("3) Add Chips (coming soon)");
