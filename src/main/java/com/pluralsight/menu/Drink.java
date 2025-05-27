@@ -26,4 +26,13 @@ public class Drink extends BaseProduct {
         if (input == null || input.isEmpty()) return input;
         return input.substring(0, 1).toUpperCase() + input.substring(1).toLowerCase();
     }
+
+    public String getSize() {
+        return size;
+    }
+
+    public String getFlavor() {
+        return flavor;
+    }
+
 }
