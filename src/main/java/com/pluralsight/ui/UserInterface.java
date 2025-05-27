@@ -1,6 +1,8 @@
 package com.pluralsight.ui;
 
+import com.pluralsight.menu.Drink;
 import com.pluralsight.menu.Sandwich;
+import com.pluralsight.orders.DrinkBuilder;
 import com.pluralsight.orders.Order;
 import com.pluralsight.FileManager.FileManager;
 import com.pluralsight.orders.SandwichBuilder;
@@ -38,7 +40,7 @@ public class UserInterface {
         while (ordering) {
             Console.header("       Order Menu");
             Console.print("1) Add Sandwich");
-            Console.print("2) Add Drink (coming soon)");
+            Console.print("2) Add Drink ");
             Console.print("3) Add Chips (coming soon)");
             Console.print("4) Checkout");
             Console.print("0) Cancel Order");
@@ -50,6 +52,9 @@ public class UserInterface {
                     Sandwich sandwich = SandwichBuilder.build(Console::promptForString);
                     order.addItem(sandwich);
                     Console.success("Sandwich added!");
+                }
+                case "2" -> {
+                    Drink drink = DrinkBuilder.build(Console::promptForString);
                 }
                 case "4" -> {
                     checkout(order);
