@@ -40,7 +40,7 @@ public class Console {
     // Reusable styling
     public static void header(String text) {
         System.out.println("\n\u001B[36m==============================");
-        System.out.println(" " +     text.toUpperCase());
+        System.out.println(" " +       text.toUpperCase());
         System.out.println("==============================\u001B[0m");
     }
 

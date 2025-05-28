@@ -26,9 +26,9 @@ public class Order {
 
     public String getReceiptText() {
         StringBuilder receipt = new StringBuilder();
-        receipt.append("=====================================\n");
+        receipt.append("===================================\n");
         receipt.append("           DELI-cious Receipt         \n");
-        receipt.append("=====================================\n\n");
+        receipt.append("===================================\n\n");
 
         for (BaseProduct item : items) {
             item.calculatePrice(); // ensure price is updated

@@ -6,8 +6,8 @@ import com.pluralsight.menu.Sandwich;
 import com.pluralsight.orders.ChipsBuilder;
 import com.pluralsight.orders.DrinkBuilder;
 import com.pluralsight.orders.Order;
-import com.pluralsight.FileManager.FileManager;
 import com.pluralsight.orders.SandwichBuilder;
+import com.pluralsight.systemoperations.Checkout;
 
 public class UserInterface {
     private boolean running = true;
@@ -67,8 +67,8 @@ public class UserInterface {
                 }
 
                 case "4" -> {
-                    checkout(order);
-                    ordering = false;
+                    Checkout checkout = new Checkout();
+                    checkout.process(order);
                 }
                 case "0" -> {
                     Console.info("Order cancelled.");
@@ -79,11 +79,5 @@ public class UserInterface {
         }
     }
 
-    private void checkout(Order order) {
-        Console.header("Final Receipt");
-        String receipt = order.getReceiptText();
-        Console.print(receipt);
-        FileManager.saveReceipt(receipt);
-        Console.success("Order saved to receipts folder.");
-    }
+
 }

@@ -1,6 +1,7 @@
 package com.pluralsight.FileManager;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -9,7 +10,13 @@ import java.time.format.DateTimeFormatter;
 public class FileManager {
 
     public static void saveReceipt(String receiptContent) {
+        // Ensure the receipts directory exists
+        File receiptsDir = new File("receipts");
+        if (!receiptsDir.exists()) {
+            receiptsDir.mkdirs(); // create receipts/ if missing
+        }
 
+        // Format timestamp as yyyyMMdd-HHmmss
         String timestamp = LocalDateTime.now()
                 .format(DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss"));
 
@@ -25,5 +32,4 @@ public class FileManager {
             e.printStackTrace();
         }
     }
-
 }
