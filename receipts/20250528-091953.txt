@@ -1,0 +1,16 @@
+=========================================
+         DELI-cious Sandwich Shop         
+              Order Receipt               
+=========================================
+
+4" wheat Sandwich              $ 6.50
+  - lettuce tomato onion green pepper $ 1.00
+  * Toasted                   
+
+Medium Spirte Drink            $ 2.50
+
+Sunshine chips Chips           $ 1.50
+
+-----------------------------------------
+TOTAL:                         $10.50
+Date: 2025-05-28 09:19 AM

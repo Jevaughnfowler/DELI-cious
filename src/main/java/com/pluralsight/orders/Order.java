@@ -26,35 +26,40 @@ public class Order {
 
     public String getReceiptText() {
         StringBuilder receipt = new StringBuilder();
-        receipt.append("===================================\n");
-        receipt.append("           DELI-cious Receipt         \n");
-        receipt.append("===================================\n\n");
+
+        receipt.append("=========================================\n");
+        receipt.append("         DELI-cious Sandwich Shop         \n");
+        receipt.append("              Order Receipt               \n");
+        receipt.append("=========================================\n\n");
 
         for (BaseProduct item : items) {
-            item.calculatePrice(); // ensure price is updated
-            receipt.append(item.toString()).append("\n");
+            item.calculatePrice(); // make sure price is updated
 
-            // If it's a sandwich, show toppings
+            // Print main item line
+            receipt.append(String.format("%-30s $%5.2f\n", item.getName(), item.getPrice()));
+
+            // If it's a sandwich, print toppings and toast status
             if (item instanceof com.pluralsight.menu.Sandwich sandwich) {
                 for (Topping topping : sandwich.getToppings()) {
-                    receipt.append("  - ").append(topping.getName());
+                    String label = "  - " + topping.getName();
                     if (topping.isExtra()) {
-                        receipt.append(" (extra)");
+                        label += " (extra)";
                     }
-                    receipt.append("\n");
+                    receipt.append(String.format("%-30s $%5.2f\n", label, topping.getPrice(sandwich.getSize())));
                 }
+
                 if (sandwich.isToasted()) {
-                    receipt.append("  * Toasted\n");
+                    receipt.append(String.format("%-30s\n", "  * Toasted"));
                 }
             }
+
             receipt.append("\n");
         }
 
-        receipt.append("-------------------------------------\n");
-        receipt.append(String.format("Total: $%.2f\n", getTotal()));
+        receipt.append("-----------------------------------------\n");
+        receipt.append(String.format("%-30s $%5.2f\n", "TOTAL:", getTotal()));
         receipt.append("Date: ")
-                .append(LocalDateTime.now()
-                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                .append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a")))
                 .append("\n");
 
         return receipt.toString();

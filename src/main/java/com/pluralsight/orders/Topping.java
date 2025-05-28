@@ -2,7 +2,7 @@ package com.pluralsight.orders;
 
 public class Topping {
     private String name;
-    private String type;       // "meat", "cheese", "regular"
+    private String type;       // "meat", "cheese", "regular", "sauce", "side"
     private boolean isExtra;
 
     public Topping(String name, String type, boolean isExtra) {
@@ -62,7 +62,13 @@ public class Topping {
                 break;
 
             case "regular": // Regular toppings and sauces are free
+            case "sauce":
                 price = 0.00;
+                break;
+
+            case "side":
+                // Fixed price for sides, no size difference, no extras
+                price = 1.50;
                 break;
         }
 
