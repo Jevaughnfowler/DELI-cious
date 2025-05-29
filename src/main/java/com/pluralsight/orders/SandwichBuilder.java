@@ -1,12 +1,33 @@
 package com.pluralsight.orders;
 
 import com.pluralsight.menu.Sandwich;
-
 import java.util.function.Function;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SandwichBuilder {
 
+    private static final ArrayList<String> MEATS = new ArrayList<>(Arrays.asList(
+            "steak", "ham", "salami", "roast beef", "chicken", "bacon"));
+    private static final ArrayList<String> CHEESES = new ArrayList<>(Arrays.asList(
+            "american", "provolone", "cheddar", "swiss"));
+    private static final ArrayList<String> REGULAR_TOPPINGS = new ArrayList<>(Arrays.asList(
+            "lettuce", "peppers", "onions", "tomatoes", "jalapeños",
+            "cucumbers", "pickles", "guacamole", "mushrooms"));
+    private static final ArrayList<String> SAUCES = new ArrayList<>(Arrays.asList(
+            "mayo", "mustard", "ketchup", "ranch", "thousand islands", "vinaigrette"));
+
     public static Sandwich build(Function<String, String> prompt) {
+        String input = prompt.apply("Would you like a signature sandwich or build your own? (signature/custom): ").trim().toLowerCase();
+
+        if (input.equals("signature")) {
+            return chooseSignature(prompt);
+        } else {
+            return buildCustom(prompt);
+        }
+    }
+
+    private static Sandwich buildCustom(Function<String, String> prompt) {
         // Prompt for sandwich size
         String size;
         while (true) {
@@ -27,31 +48,85 @@ public class SandwichBuilder {
 
         Sandwich sandwich = new Sandwich(size, bread, toasted);
 
-        String addTopping = prompt.apply("Would you like to add a topping? (yes/no): ").trim();
-        if (addTopping.equalsIgnoreCase("yes")) {
-            String toppingName = prompt.apply("Enter topping name: ").trim();
+        // Add toppings by category
+        addToppingsFromCategory(prompt, sandwich, "meat", MEATS);
+        addToppingsFromCategory(prompt, sandwich, "cheese", CHEESES);
+        addToppingsFromCategory(prompt, sandwich, "regular", REGULAR_TOPPINGS);
+        addToppingsFromCategory(prompt, sandwich, "sauce", SAUCES);
 
-
-            // Validate topping type
-            String type;
-            while (true) {
-                type = prompt.apply("Topping type (meat): ").trim().toLowerCase();
-                if (type.equals("steak") || type.equals("ham") || type.equals("salami") || type.equals("becan")
-                        || type.equals("roast beef")  || type.equals("chicken")) {
-                    break;
-                } else {
-                    System.out.println("Invalid type. e.g. Choose chicken, ham, Steak, or regular.");
-                }
-            }
-
-            boolean isExtra = prompt.apply("Is this an extra portion? (yes/no): ")
-                    .trim().equalsIgnoreCase("yes");
-
-            Topping topping = new Topping(toppingName, type, isExtra);
-            sandwich.addTopping(topping);
-
-
-        }
         return sandwich;
+    }
+
+    private static void addToppingsFromCategory(Function<String, String> prompt, Sandwich sandwich, String type, ArrayList<String> listToUse) {
+        System.out.println("\nChoose one or more " + type + "(s) by entering numbers separated by commas (e.g. 1,3,5), or leave blank for none:");
+        for (int i = 0; i < listToUse.size(); i++) {
+            System.out.printf("%d. %s%n", i + 1, capitalize(listToUse.get(i)));
+        }
+
+        String multipleChoice = prompt.apply("Enter your choices: ").trim();
+        if (multipleChoice.isEmpty()) {
+            System.out.println("No " + type + " chosen.");
+            return;
+        }
+
+        if (!multipleChoice.matches("^(\\d+)(,\\d+)*$")) {
+            System.out.println("Invalid input format. Skipping " + type + " selection.");
+            return;
+        }
+
+        String[] choices = multipleChoice.split(",");
+        for (String choiceStr : choices) {
+            int choiceNum = Integer.parseInt(choiceStr.trim());
+            if (choiceNum < 1 || choiceNum > listToUse.size()) {
+                System.out.println("Choice " + choiceNum + " is out of range. Skipping.");
+                continue;
+            }
+            String chosenTopping = listToUse.get(choiceNum - 1);
+            boolean isExtra = prompt.apply("Is " + capitalize(chosenTopping) + " an extra portion? (yes/no): ")
+                    .trim().equalsIgnoreCase("yes");
+            sandwich.addTopping(new Topping(capitalize(chosenTopping), type, isExtra));
+            System.out.println(capitalize(chosenTopping) + " added" + (isExtra ? " as extra." : "."));
+        }
+    }
+
+    private static Sandwich chooseSignature(Function<String, String> prompt) {
+        String choice;
+        while (true) {
+            choice = prompt.apply("Choose a signature sandwich: (1) BLT, (2) Philly Cheese Steak: ").trim();
+            if (choice.equals("1") || choice.equals("2")) break;
+            System.out.println("Invalid choice. Please enter 1 or 2.");
+        }
+
+        Sandwich sandwich;
+        if (choice.equals("1")) {
+            sandwich = new Sandwich("8", "white", true);
+            sandwich.addTopping(new Topping("Bacon", "meat", false));
+            sandwich.addTopping(new Topping("Cheddar", "cheese", false));
+            sandwich.addTopping(new Topping("Lettuce", "regular", false));
+            sandwich.addTopping(new Topping("Tomato", "regular", false));
+            sandwich.addTopping(new Topping("Ranch", "sauce", false));
+        } else {
+            sandwich = new Sandwich("8", "white", true);
+            sandwich.addTopping(new Topping("Steak", "meat", false));
+            sandwich.addTopping(new Topping("American", "cheese", false));
+            sandwich.addTopping(new Topping("Peppers", "regular", false));
+            sandwich.addTopping(new Topping("Mayo", "sauce", false));
+        }
+
+        // Offer customization on signature sandwiches too
+        if (prompt.apply("Would you like to add more toppings? (yes/no): ").trim().equalsIgnoreCase("yes")) {
+            // Let user add toppings from all categories
+            addToppingsFromCategory(prompt, sandwich, "meat", MEATS);
+            addToppingsFromCategory(prompt, sandwich, "cheese", CHEESES);
+            addToppingsFromCategory(prompt, sandwich, "regular", REGULAR_TOPPINGS);
+            addToppingsFromCategory(prompt, sandwich, "sauce", SAUCES);
+        }
+
+        return sandwich;
+    }
+
+    private static String capitalize(String s) {
+        if (s == null || s.isEmpty()) return s;
+        return s.substring(0, 1).toUpperCase() + s.substring(1);
     }
 }

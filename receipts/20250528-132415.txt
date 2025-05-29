@@ -1,0 +1,43 @@
+=========================================
+         DELI-cious Sandwich Shop         
+              Order Receipt               
+=========================================
+
+4" wheat Sandwich              $ 8.25
+  - Steak                      $ 1.00
+  - Ham                        $ 1.00
+  - American                   $ 0.75
+  - Lettuce (extra)            $ 0.00
+  - Peppers                    $ 0.00
+  - Onions                     $ 0.00
+  - Tomatoes                   $ 0.00
+  - Jalapeños                  $ 0.00
+  - Cucumbers                  $ 0.00
+  - Pickles                    $ 0.00
+  - Guacamole                  $ 0.00
+  - Mayo                       $ 0.00
+  - Mustard                    $ 0.00
+  * Toasted                   
+
+Medium Coke Drink              $ 2.50
+
+Lays Chips                     $ 1.50
+
+8" white Sandwich              $10.50
+  - Bacon                      $ 2.00
+  - Cheddar                    $ 1.50
+  - Lettuce                    $ 0.00
+  - Tomato                     $ 0.00
+  - Ranch                      $ 0.00
+  * Toasted                   
+
+8" white Sandwich              $10.50
+  - Steak                      $ 2.00
+  - American                   $ 1.50
+  - Peppers                    $ 0.00
+  - Mayo                       $ 0.00
+  * Toasted                   
+
+-----------------------------------------
+TOTAL:                         $33.25
+Date: 2025-05-28 01:24 PM
