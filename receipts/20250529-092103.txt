@@ -1,0 +1,23 @@
+=========================================
+         DELI-cious Sandwich Shop         
+              Order Receipt               
+=========================================
+
+12" wheat Sandwich             $13.75
+  - Chicken                    $ 3.00
+  - American                   $ 2.25
+  - Lettuce                    $ 0.00
+  - Peppers                    $ 0.00
+  - Onions                     $ 0.00
+  - Tomatoes                   $ 0.00
+  - Mayo                       $ 0.00
+  - Mustard                    $ 0.00
+  * Toasted                   
+
+Medium Coke Drink              $ 2.50
+
+Lays Chips                     $ 1.50
+
+-----------------------------------------
+TOTAL:                         $17.75
+Date: 2025-05-29 09:21 AM

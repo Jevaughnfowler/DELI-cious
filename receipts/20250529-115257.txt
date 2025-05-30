@@ -1,0 +1,16 @@
+=========================================
+         DELI-cious Sandwich Shop         
+              Order Receipt               
+=========================================
+
+8" white Sandwich              $10.50
+  - Bacon                      $ 2.00
+  - Cheddar                    $ 1.50
+  - Lettuce                    $ 0.00
+  - Tomato                     $ 0.00
+  - Ranch                      $ 0.00
+  * Toasted                   
+
+-----------------------------------------
+TOTAL:                         $10.50
+Date: 2025-05-29 11:52 AM

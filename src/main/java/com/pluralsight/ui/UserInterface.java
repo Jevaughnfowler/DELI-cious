@@ -67,8 +67,8 @@ public class UserInterface {
                 }
 
                 case "4" -> {
-                    Checkout checkout = new Checkout();
-                    checkout.process(order);
+                    Checkout.process(order);
+                    ordering = false;
                 }
                 case "0" -> {
                     Console.info("Order cancelled.");

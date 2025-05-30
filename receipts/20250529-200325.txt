@@ -1,0 +1,19 @@
+=========================================
+         DELI-cious Sandwich Shop         
+              Order Receipt               
+=========================================
+
+8" rye Sandwich                $10.50
+  - Roast beef                 $ 2.00
+  - American                   $ 1.50
+  - Lettuce (extra)            $ 0.00
+  - Peppers (extra)            $ 0.00
+  - Cucumbers (extra)          $ 0.00
+  - Pickles (extra)            $ 0.00
+  - Mayo                       $ 0.00
+  - Mustard                    $ 0.00
+  * Toasted                   
+
+-----------------------------------------
+TOTAL:                         $10.50
+Date: 2025-05-29 08:03 PM

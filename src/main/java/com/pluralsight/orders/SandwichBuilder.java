@@ -1,21 +1,12 @@
 package com.pluralsight.orders;
 
 import com.pluralsight.menu.Sandwich;
+import com.pluralsight.menu.ToppingMenu;
+import com.pluralsight.orders.Topping;
+
 import java.util.function.Function;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class SandwichBuilder {
-
-    private static final ArrayList<String> MEATS = new ArrayList<>(Arrays.asList(
-            "steak", "ham", "salami", "roast beef", "chicken", "bacon"));
-    private static final ArrayList<String> CHEESES = new ArrayList<>(Arrays.asList(
-            "american", "provolone", "cheddar", "swiss"));
-    private static final ArrayList<String> REGULAR_TOPPINGS = new ArrayList<>(Arrays.asList(
-            "lettuce", "peppers", "onions", "tomatoes", "jalapeños",
-            "cucumbers", "pickles", "guacamole", "mushrooms"));
-    private static final ArrayList<String> SAUCES = new ArrayList<>(Arrays.asList(
-            "mayo", "mustard", "ketchup", "ranch", "thousand islands", "vinaigrette"));
 
     public static Sandwich build(Function<String, String> prompt) {
         String input = prompt.apply("Would you like a signature sandwich or build your own? (signature/custom): ").trim().toLowerCase();
@@ -48,16 +39,16 @@ public class SandwichBuilder {
 
         Sandwich sandwich = new Sandwich(size, bread, toasted);
 
-        // Add toppings by category
-        addToppingsFromCategory(prompt, sandwich, "meat", MEATS);
-        addToppingsFromCategory(prompt, sandwich, "cheese", CHEESES);
-        addToppingsFromCategory(prompt, sandwich, "regular", REGULAR_TOPPINGS);
-        addToppingsFromCategory(prompt, sandwich, "sauce", SAUCES);
+        // Add toppings by category using ToppingMenu constants
+        addToppingsFromCategory(prompt, sandwich, "meat", ToppingMenu.MEATS);
+        addToppingsFromCategory(prompt, sandwich, "cheese", ToppingMenu.CHEESES);
+        addToppingsFromCategory(prompt, sandwich, "regular", ToppingMenu.REGULAR_TOPPINGS);
+        addToppingsFromCategory(prompt, sandwich, "sauce", ToppingMenu.SAUCES);
 
         return sandwich;
     }
 
-    private static void addToppingsFromCategory(Function<String, String> prompt, Sandwich sandwich, String type, ArrayList<String> listToUse) {
+    private static void addToppingsFromCategory(Function<String, String> prompt, Sandwich sandwich, String type, java.util.ArrayList<String> listToUse) {
         System.out.println("\nChoose one or more " + type + "(s) by entering numbers separated by commas (e.g. 1,3,5), or leave blank for none:");
         for (int i = 0; i < listToUse.size(); i++) {
             System.out.printf("%d. %s%n", i + 1, capitalize(listToUse.get(i)));
@@ -82,7 +73,7 @@ public class SandwichBuilder {
                 continue;
             }
             String chosenTopping = listToUse.get(choiceNum - 1);
-            boolean isExtra = prompt.apply("Is " + capitalize(chosenTopping) + " an extra portion? (yes/no): ")
+            boolean isExtra = prompt.apply("Would you like extra portion of " + capitalize(chosenTopping) + "? (yes/no): ")
                     .trim().equalsIgnoreCase("yes");
             sandwich.addTopping(new Topping(capitalize(chosenTopping), type, isExtra));
             System.out.println(capitalize(chosenTopping) + " added" + (isExtra ? " as extra." : "."));
@@ -115,11 +106,10 @@ public class SandwichBuilder {
 
         // Offer customization on signature sandwiches too
         if (prompt.apply("Would you like to add more toppings? (yes/no): ").trim().equalsIgnoreCase("yes")) {
-            // Let user add toppings from all categories
-            addToppingsFromCategory(prompt, sandwich, "meat", MEATS);
-            addToppingsFromCategory(prompt, sandwich, "cheese", CHEESES);
-            addToppingsFromCategory(prompt, sandwich, "regular", REGULAR_TOPPINGS);
-            addToppingsFromCategory(prompt, sandwich, "sauce", SAUCES);
+            addToppingsFromCategory(prompt, sandwich, "meat", ToppingMenu.MEATS);
+            addToppingsFromCategory(prompt, sandwich, "cheese", ToppingMenu.CHEESES);
+            addToppingsFromCategory(prompt, sandwich, "regular", ToppingMenu.REGULAR_TOPPINGS);
+            addToppingsFromCategory(prompt, sandwich, "sauce", ToppingMenu.SAUCES);
         }
 
         return sandwich;
