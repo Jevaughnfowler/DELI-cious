@@ -1,8 +1,8 @@
-🥪 DELI-cious Sandwich Shop CLI
+🥪 DELI Sandwich Shop CLI
 
 
 
-DELI-cious is a terminal-based Java application that simulates a sandwich shop ordering system. It allows users to build their own sandwich from scratch or select from curated signature options. Perfect for demonstrating object-oriented principles, user input handling, and dynamic menu logic in Java.
+DELI is a terminal-based Java application that simulates a sandwich shop ordering system. It allows users to build their own sandwich from scratch or select from curated signature options. Perfect for demonstrating object-oriented principles, user input handling, and dynamic menu logic in Java.
 
 ✨ Features
 🥪 Build your own or choose a signature sandwich
